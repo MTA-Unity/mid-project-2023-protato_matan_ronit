@@ -1,19 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-    [SerializeField] private GameObject CharacterPrfab;
     
-    [SerializeField] protected string characterName{ get; set; }
-    [SerializeField] protected float speed{ get; set; }
-    [SerializeField] protected float power{ get; set; }
-    [SerializeField] protected float fireRate{ get; set; }
-    [SerializeField] protected float health { get; set; }
+    
+    [SerializeField] protected string CharacterName{ get; set; }
+    [SerializeField] protected float Speed{ get; set; }
+    [SerializeField] protected float Power{ get; set; }
+    [SerializeField] protected float FireRate{ get; set; }
+    [SerializeField] protected int maxHealth { get; set; }
+    [SerializeField] protected int Health { get; set; }
 
-
-    private GameObject variableForPrefab;
+    public HealthBar healthBar;
 
     public Transform firePoint;
     private float _nextFireTime;
@@ -31,21 +29,16 @@ public class Character : MonoBehaviour
     private void Start()
     {
        _rb = GetComponent<Rigidbody2D>();
-       
        _mainCamera = Camera.main;
-
-        
-       if (ChosenCharacter._chosen == 1)
+       Health = maxHealth;
+       // Find the HealthBar GameObject by its tag
+       var healthBarObject = GameObject.FindWithTag("HealthBarTag");
+       healthBar = healthBarObject?.GetComponent<HealthBar>();
+       Debug.Log("HealthBar reference: " + healthBar);
+       if (healthBar != null)
        {
-           variableForPrefab = Resources.Load("prefabs/Speedy", typeof(GameObject)) as GameObject;
+           healthBar.UpdateHealthBar(Health, maxHealth);
        }
-       else
-       {
-           //variableForPrefab = Resources.Load("prefabs/Tanky", typeof(GameObject)) as GameObject;
-       }
-       
-       Instantiate(variableForPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-       
        //_uiManager = FindObjectOfType<UIManager>();
     }
 
@@ -64,55 +57,88 @@ public class Character : MonoBehaviour
 
     private void HandleShooting()
     {
-        if (Input.GetKeyDown("Fire1") && Time.time >= _nextFireTime)
-        {
-            Debug.Log("shoot");
-            Shoot();
-            _nextFireTime = Time.time + 0.5f;
-            //_uiManager.IncreasePoints(10);
-        }
+        if (!Input.GetButton("Fire1") || Time.time < _nextFireTime) return;
+        Debug.Log("shoot");
+        Shoot();
+        _nextFireTime = Time.time + 0.5f;
+        //_uiManager.IncreasePoints(10);    
     }
     
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        // if (collision.gameObject.CompareTag("Asteroid"))
-        // {
-        //     // Handle collision
-        //     //_uiManager.DecreaseLives();
-        // }
-    }
+    // private void OnCollisionEnter2D(Collision2D collision)
+    // {
+    //     // if (collision.gameObject.CompareTag("Asteroid"))
+    //     // {
+    //     //     // Handle collision
+    //     //     //_uiManager.DecreaseLives();
+    //     // }
+    // }
     
     private void Shoot()
     {
-        var fireDirection = (firePoint.position - transform.position).normalized;
-        var bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
-        bullet.GetComponent<Bullet>().SetDirection(fireDirection);
-        bullet.SetActive(true);
+        Vector3 mousePosition = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 bulletDirection = (mousePosition - transform.position).normalized;
+        ShootBullet(bulletDirection);
+    }
+    
+    void ShootBullet(Vector2 direction)
+    {
+        GameObject bulletObject = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+        Bullet bullet = bulletObject.GetComponent<Bullet>();
+        bullet.SetDirection(direction * Bullet.moveSpeed);
+        bulletObject.SetActive(true);
     }
 
     virtual protected void HandleMovement()
     {
-        // Player movement
-        var horizontalInput = Input.GetAxis("Horizontal");
-        var verticalInput = Input.GetAxis("Vertical");
+        Vector3 pos = transform.position;
 
-        var moveDirection = new Vector2(horizontalInput, verticalInput).normalized;
-        _rb.velocity = moveDirection * speed;
+        if (Input.GetKey("w"))
+        {
+            pos.y += Speed * Time.deltaTime;
+        }
+        if (Input.GetKey("d"))
+        {
+            pos.x += Speed * Time.deltaTime;
+        }
+        if (Input.GetKey("s"))
+        {
+            pos.y -= Speed * Time.deltaTime;
+        }
+        if (Input.GetKey("a"))
+        {
+            pos.x -= Speed * Time.deltaTime;
+        }
+
+        transform.position = pos;
+        
+        if (_mainCamera == null) return;
         
         var viewportPosition = _mainCamera.WorldToViewportPoint(transform.position);
-        if (viewportPosition.x > 1f) viewportPosition.x = 0f;
-        if (viewportPosition.x < 0f) viewportPosition.x = 1f;
-        if (viewportPosition.y > 1f) viewportPosition.y = 0f;
-        if (viewportPosition.y < 0f) viewportPosition.y = 1f;
+        
+        if (viewportPosition.x > 1f) viewportPosition.x = 1f;
+        if (viewportPosition.x < 0f) viewportPosition.x = 0f;
+        if (viewportPosition.y > 1f) viewportPosition.y = 1f;
+        if (viewportPosition.y < 0f) viewportPosition.y = 0f;
+
         transform.position = _mainCamera.ViewportToWorldPoint(viewportPosition);
     }
     
     public void Attack()
     {
-        Debug.Log(characterName + " attacks with power " + power);
+        Debug.Log(CharacterName + " attacks with power " + Power);
     }
     
-    
+    public void TakeDamage(int damageAmount)
+    {
+        Health -= damageAmount;
+        Health = Mathf.Clamp(Health, 0, maxHealth); // Clamp health to valid range
+        healthBar.UpdateHealthBar(Health, maxHealth);
+        
+        if (Health <= 0)
+        {
+            // Handle player death or game over
+        }
+    }
 }
 
 

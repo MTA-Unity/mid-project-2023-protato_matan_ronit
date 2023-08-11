@@ -1,8 +1,9 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float moveSpeed = 10f;
+    public static float moveSpeed = 4f;
     public float lifeTime = 2f;
     private Camera _mainCamera;
     

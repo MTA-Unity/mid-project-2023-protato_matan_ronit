@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5327948154934119939}
   - component: {fileID: 6863858507175877631}
-  - component: {fileID: 6924872277024257907}
+  - component: {fileID: -7065271918221155735}
+  - component: {fileID: 1853000014007799087}
   m_Layer: 0
   m_Name: Speedy
   m_TagString: Untagged
@@ -85,7 +86,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6924872277024257907
+--- !u!114 &-7065271918221155735
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,11 +95,32 @@ MonoBehaviour:
   m_GameObject: {fileID: 8952291456352049671}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 334e933378a04874d8de5b4aeb0c617c, type: 3}
+  m_Script: {fileID: 11500000, guid: 8719cbb4d36aa9942aac80d1238ebbc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CharacterPrfab: {fileID: 8952291456352049671}
+  healthBar: {fileID: 8183437536304549426, guid: 37a0526ff3671404c99bd435f9cb9878, type: 3}
   firePoint: {fileID: 5327948154934119939}
   targetPosition: {x: 0, y: 0}
-  bulletPrefab: {fileID: 5846963152495991413, guid: dbc8218717b48ef4cbd55af55088c1f7, type: 3}
+  bulletPrefab: {fileID: 8254775823121348147, guid: dbc8218717b48ef4cbd55af55088c1f7, type: 3}
   player: {fileID: 8952291456352049671}
+--- !u!50 &1853000014007799087
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8952291456352049671}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 0
