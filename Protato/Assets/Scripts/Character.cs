@@ -28,7 +28,8 @@ public class Character : MonoBehaviour
     
     private void Start()
     {
-       _rb = GetComponent<Rigidbody2D>();
+        Speed = 10; //later change it to the specific character's speed
+        _rb = GetComponent<Rigidbody2D>();
        _mainCamera = Camera.main;
        Health = maxHealth;
        // Find the HealthBar GameObject by its tag
@@ -46,6 +47,11 @@ public class Character : MonoBehaviour
     {
         // if (!_uiManager.IsPaused)
         // {
+        if (_mainCamera == null)
+        {
+            _rb = GetComponent<Rigidbody2D>();
+            _mainCamera = Camera.main;
+        }
         HandleMovement();
         HandleShooting();
         // }
@@ -75,9 +81,17 @@ public class Character : MonoBehaviour
     
     private void Shoot()
     {
-        Vector3 mousePosition = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 bulletDirection = (mousePosition - transform.position).normalized;
-        ShootBullet(bulletDirection);
+        if (_mainCamera == null)
+        {
+           // Debug.Log("Main camera reference is missing!!");
+        }
+        else
+        {
+           // Debug.Log("Not Null!!");
+            Vector3 mousePosition = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 bulletDirection = (mousePosition - transform.position).normalized;
+            ShootBullet(bulletDirection);
+        }
     }
     
     void ShootBullet(Vector2 direction)
@@ -91,28 +105,36 @@ public class Character : MonoBehaviour
     virtual protected void HandleMovement()
     {
         Vector3 pos = transform.position;
-
+       
         if (Input.GetKey("w"))
         {
             pos.y += Speed * Time.deltaTime;
+           // Debug.Log("w");
         }
         if (Input.GetKey("d"))
         {
             pos.x += Speed * Time.deltaTime;
+            //Debug.Log("d");
         }
         if (Input.GetKey("s"))
         {
             pos.y -= Speed * Time.deltaTime;
+           // Debug.Log("s");
         }
         if (Input.GetKey("a"))
         {
             pos.x -= Speed * Time.deltaTime;
+          //  Debug.Log("a");
+        }
+        
+        transform.position = pos;
+
+        if (_mainCamera == null)
+        {
+            Debug.Log("Main camera reference is missing!!");
+            return;
         }
 
-        transform.position = pos;
-        
-        if (_mainCamera == null) return;
-        
         var viewportPosition = _mainCamera.WorldToViewportPoint(transform.position);
         
         if (viewportPosition.x > 1f) viewportPosition.x = 1f;
