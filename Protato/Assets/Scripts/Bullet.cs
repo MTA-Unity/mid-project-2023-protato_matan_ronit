@@ -15,8 +15,6 @@ public class Bullet : MonoBehaviour
    
     private void Awake()
     {
-        Debug.Log("awake");
-        
         Destroy(gameObject, lifeTime);
         _rb = GetComponent<Rigidbody2D>();
         _rb.gravityScale = 0;
@@ -24,7 +22,8 @@ public class Bullet : MonoBehaviour
 
     private void Update()
     {
-        transform.position += (Vector3)_direction * (Time.deltaTime * moveSpeed);
+        if(!UIManager.IsPaused)
+            transform.position += (Vector3)_direction * (Time.deltaTime * moveSpeed);
     }
 
 

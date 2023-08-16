@@ -52,8 +52,12 @@ public class Character : MonoBehaviour
             _rb = GetComponent<Rigidbody2D>();
             _mainCamera = Camera.main;
         }
-        HandleMovement();
-        HandleShooting();
+
+        if (!UIManager.IsPaused)
+        {
+            HandleMovement();
+            HandleShooting();
+        }
         // }
         // else
         // {
