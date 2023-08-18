@@ -11,8 +11,8 @@ public class UIManager : MonoBehaviour
     public TMP_Text livesText;
     public TMP_Text pointsText;
     
-    public static int _health;
-    public static int _money;
+    public static int Health;
+    public static int Money;
     
     public Button popup;
     public Button stayPopup;
@@ -43,20 +43,20 @@ public class UIManager : MonoBehaviour
 
     public void UpdateHealthText()
     {
-        livesText.text = $"{_health} HP";
+        livesText.text = $"{Health} HP";
     }
 
     public void UpdatePointsText()
     {
-        pointsText.text = $"{_money} $";
+        pointsText.text = $"{Money} $";
     }
 
     public void DecreaseLives()
     {
-        _health--;
+        Health--;
         UpdateHealthText();
 
-        if (_health <= 0)
+        if (Health <= 0)
         {
             // Game over logic
         }
@@ -64,7 +64,7 @@ public class UIManager : MonoBehaviour
 
     public void IncreasePoints(int amount)
     {
-        _money += amount;
+        Money += amount;
         UpdatePointsText();
     }
     

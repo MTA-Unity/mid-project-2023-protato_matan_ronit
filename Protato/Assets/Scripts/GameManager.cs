@@ -18,18 +18,18 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        UIManager._money = 0;
+        UIManager.Money = 0;
         
         Money = 0;
-        Debug.Log("chosen = " + ChosenCharacter._chosen);
        
         player = Instantiate(_variableForPrefab[ChosenCharacter._chosen - 1], new Vector3((float)0.6187416, (float)-0.1874166, 0), Quaternion.identity);
+        player.tag = "Player";
 
-        UIManager._health = ChosenCharacter._chosen switch
+        UIManager.Health = ChosenCharacter._chosen switch
         {
             1 => 100,
             2 => 250,
-            _ => UIManager._health // Use current value if none of the cases match
+            _ => UIManager.Health // Use current value if none of the cases match
         };
     }
     
