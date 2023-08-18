@@ -5,15 +5,16 @@ TagManager:
   serializedVersion: 2
   tags:
   - HealthBarTag
+  - Enemy
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Enemy
   - Water
   - UI
+  - Bullet
   - background
-  - 
   - 
   - 
   - 
