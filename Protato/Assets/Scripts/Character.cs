@@ -73,16 +73,17 @@ public class Character : MonoBehaviour
         _nextFireTime = Time.time + 0.5f;
         //_uiManager.IncreasePoints(10);    
     }
-    
-    // private void OnCollisionEnter2D(Collision2D collision)
-    // {
-    //     // if (collision.gameObject.CompareTag("Asteroid"))
-    //     // {
-    //     //     // Handle collision
-    //     //     //_uiManager.DecreaseLives();
-    //     // }
-    // }
-    
+
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    Debug.Log("Collision with tag: " + collision.gameObject.tag);
+    //    if (collision.gameObject.CompareTag("Enemy"))
+    //    {
+    //        // Handle collision
+    //        //_uiManager.DecreaseLives();
+    //    }
+    //}
+
     private void Shoot()
     {
         if (_mainCamera == null)

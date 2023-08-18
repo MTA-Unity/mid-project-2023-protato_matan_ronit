@@ -13,6 +13,30 @@ public class Enemy : MonoBehaviour
         player = GameObject.FindWithTag("Player");
     }
 
+    //public void OnHit()
+    //{
+    //    // Play vanishing animation, apply visual effect, or deactivate the enemy
+    //    gameObject.SetActive(false);
+    //}
+
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    Debug.Log("Collision with tag: " + collision.gameObject.tag);
+    //    if (collision.gameObject.CompareTag("Bullet"))
+    //    {
+    //        Debug.Log("Collision.");
+    //        // Handle collision with enemy
+    //        Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+    //        if (enemy != null)
+    //        {
+    //            enemy.OnHit();
+    //        }
+
+    //        // Deactivate the bullet
+    //        gameObject.SetActive(false);
+    //    }
+    //}
+
     private void Update()
     {
         

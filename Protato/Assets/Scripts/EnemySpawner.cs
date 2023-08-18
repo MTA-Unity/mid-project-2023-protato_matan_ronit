@@ -24,7 +24,8 @@ public class EnemySpawner : MonoBehaviour
         {
             var newEnemy = Instantiate(enemy, new Vector3(Random.Range(-5f, 5), Random.Range(-5f, 5)),
                 Quaternion.identity);
-            newEnemy.tag = "enemy";
+            //newEnemy.tag = "enemy";
+            newEnemy.tag = "Enemy";
         }
         
         StartCoroutine(spawnEnemy(interval, enemy));
