@@ -6,47 +6,54 @@ public class Enemy : MonoBehaviour
      
     public float speed;
 
-    private float distance;
+    public int damage;
 
+    public Character playerScript;
     private void Start()
     {
         player = GameObject.FindWithTag("Player");
+        damage = 10;
+
+        playerScript = GameObject.FindWithTag("Player").GetComponent<Character>();
     }
 
-    //public void OnHit()
-    //{
-    //    // Play vanishing animation, apply visual effect, or deactivate the enemy
-    //    gameObject.SetActive(false);
-    //}
+    private void OnHit()
+    {
+        // Play vanishing animation, apply visual effect, or deactivate the enemy
+        Destroy(gameObject);
+        GameManager.EnemyCounter--;
+    }
 
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    Debug.Log("Collision with tag: " + collision.gameObject.tag);
-    //    if (collision.gameObject.CompareTag("Bullet"))
-    //    {
-    //        Debug.Log("Collision.");
-    //        // Handle collision with enemy
-    //        Enemy enemy = collision.gameObject.GetComponent<Enemy>();
-    //        if (enemy != null)
-    //        {
-    //            enemy.OnHit();
-    //        }
-
-    //        // Deactivate the bullet
-    //        gameObject.SetActive(false);
-    //    }
-    //}
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        switch (collision.gameObject.tag)
+        {
+            case "Bullet":
+                Debug.Log("Collision.");
+                // Handle collision with enemy
+                //destroy bullet     
+                Destroy(collision.gameObject);
+                this.OnHit();
+                break;
+            case "Player":
+                Debug.Log("Collision with player.");
+                playerScript.TakeDamage(damage);
+                break;
+        }
+        
+    }
 
     private void Update()
     {
+        var pTrans = player.transform.position;
+        var trans = transform.position;
         
-        distance = Vector2.Distance(transform.position, player.transform.position);
-        var direction = player.transform.position - transform.position;
+        var direction = pTrans - trans;
         direction.Normalize();
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         
         transform.position =
-            Vector2.MoveTowards(this.transform.position, player.transform.position, speed * Time.deltaTime);
+            Vector2.MoveTowards(trans, pTrans, speed * Time.deltaTime);
         
         transform.rotation = Quaternion.Euler(Vector3.forward * angle);
     }

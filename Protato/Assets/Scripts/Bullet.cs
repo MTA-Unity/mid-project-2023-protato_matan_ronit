@@ -18,8 +18,6 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject, lifeTime);
         _rb = GetComponent<Rigidbody2D>();
         _rb.gravityScale = 0;
-
-       // _rb.velocity = transform.forward * moveSpeed;//
     }
 
     private void Update()
@@ -38,22 +36,4 @@ public class Bullet : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
-
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //   // Debug.Log("Collision with tag: " + collision.gameObject.tag);
-    //    if (collision.gameObject.CompareTag("Bullet") && collision.otherCollider.CompareTag("Enemy"))
-    //    {
-    //        Debug.Log("Collision.");
-    //        // Handle collision with enemy
-    //        Enemy enemy = collision.gameObject.GetComponent<Enemy>();
-    //        if (enemy != null)
-    //        {
-    //            //  enemy.OnHit();
-    //        }
-
-    //        // Deactivate the bullet
-    //        gameObject.SetActive(false);
-    //    }
-    //}
 }

@@ -2,11 +2,9 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-    
-    
     [SerializeField] protected string CharacterName{ get; set; }
     [SerializeField] protected float Speed{ get; set; }
-    [SerializeField] protected float Power{ get; set; }
+    [SerializeField] protected float Damage{ get; set; }
     [SerializeField] protected float FireRate{ get; set; }
     [SerializeField] protected int maxHealth { get; set; }
     [SerializeField] protected int Health { get; set; }
@@ -16,31 +14,27 @@ public class Character : MonoBehaviour
     public Transform firePoint;
     private float _nextFireTime;
 
-    public Vector2 targetPosition; // You need to set this in your game logic
     public GameObject bulletPrefab;
     
-    //private UIManager _uiManager;
     private Rigidbody2D _rb;
     
     private Camera _mainCamera;
 
-    public GameObject player;
     
     private void Start()
     {
-        Speed = 10; //later change it to the specific character's speed
         _rb = GetComponent<Rigidbody2D>();
        _mainCamera = Camera.main;
        Health = maxHealth;
        // Find the HealthBar GameObject by its tag
        var healthBarObject = GameObject.FindWithTag("HealthBarTag");
-       healthBar = healthBarObject?.GetComponent<HealthBar>();
+       healthBar = healthBarObject.GetComponent<HealthBar>();
        Debug.Log("HealthBar reference: " + healthBar);
+       UIManager.Health = Health;
        if (healthBar != null)
        {
            healthBar.UpdateHealthBar(Health, maxHealth);
        }
-       //_uiManager = FindObjectOfType<UIManager>();
     }
 
     private void Update()
@@ -68,48 +62,36 @@ public class Character : MonoBehaviour
     private void HandleShooting()
     {
         if (!Input.GetButton("Fire1") || Time.time < _nextFireTime) return;
-        Debug.Log("shoot");
         Shoot();
         _nextFireTime = Time.time + 0.5f;
-        //_uiManager.IncreasePoints(10);    
     }
-
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    Debug.Log("Collision with tag: " + collision.gameObject.tag);
-    //    if (collision.gameObject.CompareTag("Enemy"))
-    //    {
-    //        // Handle collision
-    //        //_uiManager.DecreaseLives();
-    //    }
-    //}
-
+    
     private void Shoot()
     {
-        if (_mainCamera == null)
+        if (!_mainCamera)
         {
            // Debug.Log("Main camera reference is missing!!");
         }
         else
         {
            // Debug.Log("Not Null!!");
-            Vector3 mousePosition = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
-            Vector2 bulletDirection = (mousePosition - transform.position).normalized;
+            var mousePosition = _mainCamera.ScreenToWorldPoint(Input.mousePosition).normalized;
+            var bulletDirection = (mousePosition - transform.position).normalized;
             ShootBullet(bulletDirection);
         }
     }
     
-    void ShootBullet(Vector2 direction)
+    private void ShootBullet(Vector2 direction)
     {
-        GameObject bulletObject = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
-        Bullet bullet = bulletObject.GetComponent<Bullet>();
+        var bulletObject = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+        var bullet = bulletObject.GetComponent<Bullet>();
         bullet.SetDirection(direction * Bullet.moveSpeed);
         bulletObject.SetActive(true);
     }
 
-    virtual protected void HandleMovement()
+     private void HandleMovement()
     {
-        Vector3 pos = transform.position;
+        var pos = transform.position;
        
         if (Input.GetKey("w"))
         {
@@ -150,17 +132,16 @@ public class Character : MonoBehaviour
         transform.position = _mainCamera.ViewportToWorldPoint(viewportPosition);
     }
     
-    public void Attack()
+    virtual public void TakeDamage(int damageAmount)
     {
-        Debug.Log(CharacterName + " attacks with power " + Power);
-    }
-    
-    public void TakeDamage(int damageAmount)
-    {
+        Debug.Log("before Health = " + Health);
         Health -= damageAmount;
-        Health = Mathf.Clamp(Health, 0, maxHealth); // Clamp health to valid range
+        Health = Mathf.Clamp(Health, 0, maxHealth);
+        Debug.Log("clamp = "+Health);
+        UIManager.Health = Health;
         healthBar.UpdateHealthBar(Health, maxHealth);
-        
+        Debug.Log("Health = " + Health);
+        Debug.Log("UIManager.Health = " + UIManager.Health);
         if (Health <= 0)
         {
             // Handle player death or game over

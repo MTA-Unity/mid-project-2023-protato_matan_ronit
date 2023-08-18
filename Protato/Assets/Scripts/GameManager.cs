@@ -1,47 +1,50 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Unity.Collections;
 
 
 public class GameManager : MonoBehaviour
 {
-    public List<GameObject> _variableForPrefab;
+    public List<GameObject> variableForPrefab;
 
     private Camera _mainCamera;
 
-    private GameObject prefab;
+    private GameObject _prefab;
 
-    private int Money;
+    private int _money;
     
-    public static GameObject player;
+    public static GameObject Player;
+
+    public static float EnemyCounter;
 
     private void Start()
     {
         UIManager.Money = 0;
-        
-        Money = 0;
-       
-        player = Instantiate(_variableForPrefab[ChosenCharacter._chosen - 1], new Vector3((float)0.6187416, (float)-0.1874166, 0), Quaternion.identity);
-        player.tag = "Player";
 
-        UIManager.Health = ChosenCharacter._chosen switch
+        EnemyCounter = 0;
+        
+        _money = 0;
+        var chosen = ChosenCharacter._chosen;
+       
+        Player = Instantiate(variableForPrefab[chosen], new Vector3((float)0.6187416, (float)-0.1874166, 0), Quaternion.identity);
+        Player.tag = "Player";
+
+        UIManager.Health = chosen switch
         {
-            1 => 100,
-            2 => 250,
+            0 => 100,
+            1 => 250,
             _ => UIManager.Health // Use current value if none of the cases match
         };
     }
     
     public void AddMoney(int coins)
     {
-        Money += coins;
+        _money += coins;
     }
     
     public bool SubMoney(int amount)
     {
-        if (Money < amount) return false;
-        Money -= amount;
+        if (_money < amount) return false;
+        _money -= amount;
         return true;
     }
 

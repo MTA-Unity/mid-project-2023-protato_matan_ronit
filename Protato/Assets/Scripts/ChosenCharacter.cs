@@ -25,7 +25,7 @@ public class ChosenCharacter : MonoBehaviour
 
     private void highlightSpeedy()
     {
-        _chosen = 1;
+        _chosen = 0;
         var outlinePressed = speedyBtn.GetComponent<Outline>();
         var outlineCancel = tankyBtn.GetComponent<Outline>();
         outlinePressed.effectColor = highlightColor;
@@ -34,7 +34,7 @@ public class ChosenCharacter : MonoBehaviour
     
     private void highlightTanky()
     {
-        _chosen = 2;
+        _chosen = 1;
         var outlinePressed = tankyBtn.GetComponent<Outline>();
         var outlineCancel = speedyBtn.GetComponent<Outline>();
         outlinePressed.effectColor = highlightColor;
