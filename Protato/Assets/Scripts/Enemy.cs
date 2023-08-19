@@ -16,6 +16,24 @@ public class Enemy : MonoBehaviour
 
         playerScript = GameObject.FindWithTag("Player").GetComponent<Character>();
     }
+    
+    private void Update()
+    {
+
+        if (UIManager.IsPaused) return;
+        
+        var pTrans = player.transform.position;
+        var trans = transform.position;
+        
+        var direction = pTrans - trans;
+        direction.Normalize();
+        var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        
+        transform.position =
+            Vector2.MoveTowards(trans, pTrans, speed * Time.deltaTime);
+        
+        transform.rotation = Quaternion.Euler(Vector3.forward * angle);
+    }
 
     private void OnHit()
     {
@@ -43,18 +61,5 @@ public class Enemy : MonoBehaviour
         
     }
 
-    private void Update()
-    {
-        var pTrans = player.transform.position;
-        var trans = transform.position;
-        
-        var direction = pTrans - trans;
-        direction.Normalize();
-        var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        
-        transform.position =
-            Vector2.MoveTowards(trans, pTrans, speed * Time.deltaTime);
-        
-        transform.rotation = Quaternion.Euler(Vector3.forward * angle);
-    }
+    
 }

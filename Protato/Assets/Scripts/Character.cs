@@ -1,13 +1,15 @@
+using System;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Character : MonoBehaviour
+public abstract class Character : MonoBehaviour
 {
-    [SerializeField] protected string CharacterName{ get; set; }
-    [SerializeField] protected float Speed{ get; set; }
-    [SerializeField] protected float Damage{ get; set; }
-    [SerializeField] protected float FireRate{ get; set; }
-    [SerializeField] protected int maxHealth { get; set; }
-    [SerializeField] protected int Health { get; set; }
+    [SerializeField] protected string characterName;
+    [SerializeField] protected float speed;
+    [SerializeField] protected float damage;
+    [SerializeField] protected float fireRate;
+    [SerializeField] protected int maxHealth;
+    [SerializeField] protected int health;
 
     public HealthBar healthBar;
 
@@ -16,50 +18,35 @@ public class Character : MonoBehaviour
 
     public GameObject bulletPrefab;
     
-    private Rigidbody2D _rb;
+    protected Rigidbody2D Rb;
     
-    private Camera _mainCamera;
+    protected Camera MainCamera;
 
-    
-    private void Start()
+    protected Character()
     {
-        _rb = GetComponent<Rigidbody2D>();
-       _mainCamera = Camera.main;
-       Health = maxHealth;
-       // Find the HealthBar GameObject by its tag
-       var healthBarObject = GameObject.FindWithTag("HealthBarTag");
-       healthBar = healthBarObject.GetComponent<HealthBar>();
-       Debug.Log("HealthBar reference: " + healthBar);
-       UIManager.Health = Health;
-       if (healthBar != null)
-       {
-           healthBar.UpdateHealthBar(Health, maxHealth);
-       }
+        maxHealth = 100;
+        health = maxHealth;
+        speed = 2;
+        damage = 5;
     }
 
-    private void Update()
+    private void Awake()
     {
-        // if (!_uiManager.IsPaused)
-        // {
-        if (_mainCamera == null)
-        {
-            _rb = GetComponent<Rigidbody2D>();
-            _mainCamera = Camera.main;
-        }
-
-        if (!UIManager.IsPaused)
-        {
-            HandleMovement();
-            HandleShooting();
-        }
-        // }
-        // else
-        // {
-        //     _rb.velocity = Vector2.zero;
-        // }
+        health = maxHealth;
     }
 
-    private void HandleShooting()
+    protected virtual void Start()
+    {
+        Rb = GetComponent<Rigidbody2D>();
+    }
+
+    
+    protected virtual void Update()
+    {
+        
+    }
+
+    protected virtual void HandleShooting()
     {
         if (!Input.GetButton("Fire1") || Time.time < _nextFireTime) return;
         Shoot();
@@ -68,14 +55,14 @@ public class Character : MonoBehaviour
     
     private void Shoot()
     {
-        if (!_mainCamera)
+        if (!MainCamera)
         {
-           // Debug.Log("Main camera reference is missing!!");
+           Debug.Log("Main camera reference is missing!!");
         }
         else
         {
            // Debug.Log("Not Null!!");
-            var mousePosition = _mainCamera.ScreenToWorldPoint(Input.mousePosition).normalized;
+            var mousePosition = MainCamera.ScreenToWorldPoint(Input.mousePosition);
             var bulletDirection = (mousePosition - transform.position).normalized;
             ShootBullet(bulletDirection);
         }
@@ -89,60 +76,19 @@ public class Character : MonoBehaviour
         bulletObject.SetActive(true);
     }
 
-     private void HandleMovement()
-    {
-        var pos = transform.position;
-       
-        if (Input.GetKey("w"))
-        {
-            pos.y += Speed * Time.deltaTime;
-           // Debug.Log("w");
-        }
-        if (Input.GetKey("d"))
-        {
-            pos.x += Speed * Time.deltaTime;
-            //Debug.Log("d");
-        }
-        if (Input.GetKey("s"))
-        {
-            pos.y -= Speed * Time.deltaTime;
-           // Debug.Log("s");
-        }
-        if (Input.GetKey("a"))
-        {
-            pos.x -= Speed * Time.deltaTime;
-          //  Debug.Log("a");
-        }
-        
-        transform.position = pos;
-
-        if (_mainCamera == null)
-        {
-            Debug.Log("Main camera reference is missing!!");
-            return;
-        }
-
-        var viewportPosition = _mainCamera.WorldToViewportPoint(transform.position);
-        
-        if (viewportPosition.x > 1f) viewportPosition.x = 1f;
-        if (viewportPosition.x < 0f) viewportPosition.x = 0f;
-        if (viewportPosition.y > 1f) viewportPosition.y = 1f;
-        if (viewportPosition.y < 0f) viewportPosition.y = 0f;
-
-        transform.position = _mainCamera.ViewportToWorldPoint(viewportPosition);
-    }
     
-    virtual public void TakeDamage(int damageAmount)
+    
+    public void TakeDamage(int damageAmount)
     {
-        Debug.Log("before Health = " + Health);
-        Health -= damageAmount;
-        Health = Mathf.Clamp(Health, 0, maxHealth);
-        Debug.Log("clamp = "+Health);
-        UIManager.Health = Health;
-        healthBar.UpdateHealthBar(Health, maxHealth);
-        Debug.Log("Health = " + Health);
+        Debug.Log("before Health = " + health);
+        health -= damageAmount;
+        health = Mathf.Clamp(health, 0, maxHealth);
+        UIManager.Health = health;
+        
+        healthBar.SetSlider(health);
+        Debug.Log("Health = " + health);
         Debug.Log("UIManager.Health = " + UIManager.Health);
-        if (Health <= 0)
+        if (health <= 0)
         {
             // Handle player death or game over
         }

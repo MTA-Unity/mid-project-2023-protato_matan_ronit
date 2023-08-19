@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
 
     private int _money;
     
-    public static GameObject Player;
+    private static GameObject Player;
 
     public static float EnemyCounter;
 
