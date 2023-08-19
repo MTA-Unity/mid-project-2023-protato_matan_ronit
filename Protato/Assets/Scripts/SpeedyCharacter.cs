@@ -5,16 +5,16 @@ public class SpeedyCharacter : Character
     protected override void Start()
     {
         base.Start();
+        
         characterName = "Speedy";
         maxHealth = 150;
         health = maxHealth;
-        speed = 5;
+        speed = 7;
         damage = 3;
-        MainCamera = Camera.main; 
+        
         // Find the HealthBar GameObject by its tag
         healthBar = FindObjectOfType<HealthBar>();
         healthBar.SetSliderMax(maxHealth);
-        Debug.Log("maxHealth = " + maxHealth);
     }
     
     protected override void Update()
@@ -41,22 +41,18 @@ public class SpeedyCharacter : Character
         if (Input.GetKey("w"))
         {
             pos.y += speed * Time.deltaTime;
-            //Debug.Log("w");
         }
         if (Input.GetKey("d"))
         {
             pos.x += speed * Time.deltaTime;
-            //Debug.Log("d");
         }
         if (Input.GetKey("s"))
         {
             pos.y -= speed * Time.deltaTime;
-            //Debug.Log("s");
         }
         if (Input.GetKey("a"))
         {
             pos.x -= speed * Time.deltaTime;
-            //Debug.Log("a");
         }
         
         transform.position = pos;

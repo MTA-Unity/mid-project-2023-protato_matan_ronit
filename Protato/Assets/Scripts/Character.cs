@@ -38,6 +38,7 @@ public abstract class Character : MonoBehaviour
     protected virtual void Start()
     {
         Rb = GetComponent<Rigidbody2D>();
+        MainCamera = Camera.main; 
     }
 
     
@@ -92,6 +93,11 @@ public abstract class Character : MonoBehaviour
         {
             // Handle player death or game over
         }
+    }
+
+    public void addMoney(int money)
+    {
+        UIManager.Money += money;
     }
 }
 

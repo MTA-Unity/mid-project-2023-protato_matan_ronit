@@ -9,6 +9,9 @@ public class Enemy : MonoBehaviour
     public int damage;
 
     public Character playerScript;
+
+    [SerializeField] private GameObject deathEffect;
+    
     private void Start()
     {
         player = GameObject.FindWithTag("Player");
@@ -39,7 +42,10 @@ public class Enemy : MonoBehaviour
     {
         // Play vanishing animation, apply visual effect, or deactivate the enemy
         Destroy(gameObject);
+        var animation = Instantiate(deathEffect);
+        animation.transform.position = transform.position;
         GameManager.EnemyCounter--;
+        playerScript.addMoney(10);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
