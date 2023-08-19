@@ -1,10 +1,12 @@
+using System.Diagnostics;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 public abstract class Character : MonoBehaviour
 {
     [SerializeField] protected string characterName;
-    [SerializeField] protected float speed;
-    [SerializeField] protected float damage;
+    [SerializeField] protected double speed;
+    [SerializeField] protected double damage;
     [SerializeField] protected float fireRate;
     [SerializeField] protected int maxHealth;
     [SerializeField] protected int health;
@@ -22,15 +24,18 @@ public abstract class Character : MonoBehaviour
 
     protected Character()
     {
-        maxHealth = 100;
-        health = maxHealth;
-        speed = 2;
-        damage = 5;
+        maxHealth = UIManager.MaxHealth;
+        health = UIManager.MaxHealth;
+        speed = UIManager.Speed;
+        damage = UIManager.Damage;
+        
+        Debug.Log("Character UIMManager.Health = " + UIManager.Health);
+        Debug.Log("Character UIManager.Money = " + UIManager.Money);
     }
 
     private void Awake()
     {
-        health = maxHealth;
+        health = UIManager.MaxHealth;
     }
 
     protected virtual void Start()
@@ -80,9 +85,9 @@ public abstract class Character : MonoBehaviour
     public void TakeDamage(int damageAmount)
     {
         Debug.Log("before Health = " + health);
-        health -= damageAmount;
-        health = Mathf.Clamp(health, 0, maxHealth);
-        UIManager.Health = health;
+        UIManager.Health -= damageAmount;
+        UIManager.Health = Mathf.Clamp(UIManager.Health, 0, UIManager.MaxHealth);
+        health = UIManager.Health;
         
         healthBar.SetSlider(health);
         Debug.Log("Health = " + health);

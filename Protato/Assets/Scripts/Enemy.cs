@@ -45,6 +45,7 @@ public class Enemy : MonoBehaviour
         var deathEffectAnimation = Instantiate(deathEffect);
         deathEffectAnimation.transform.position = transform.position;
         GameManager.EnemyCounter--;
+        Destroy(deathEffectAnimation, 1f);
         playerScript.AddMoney(10);
     }
 

@@ -1,16 +1,16 @@
 using UnityEngine;
 
-public class SpeedyCharacter : Character
+public class TankyCharacter : Character
 {
     protected override void Start()
     {
         base.Start();
         
-        characterName = "Speedy";
+        characterName = "Tanky";
         
         // Find the HealthBar GameObject by its tag
         healthBar = FindObjectOfType<HealthBar>();
-        healthBar.SetSliderMax(UIManager.MaxHealth);
+        healthBar.SetSliderMax(maxHealth);
     }
     
     protected override void Update()

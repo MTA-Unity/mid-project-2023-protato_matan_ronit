@@ -15,25 +15,19 @@ public class GameManager : MonoBehaviour
     private static GameObject _player;
 
     public static float EnemyCounter;
+    
+    public static float EnemyDeadCounter;
 
     private void Start()
     {
-        UIManager.Money = 0;
+        EnemyCounter = 3;
 
-        EnemyCounter = 0;
-        
         _money = 0;
         var chosen = ChosenCharacter.Chosen;
-       
+        Debug.Log("GameManager UIMManager.Health = " + UIManager.Health);
+        Debug.Log("GameManager UIManager.Money = " + UIManager.Money);
         _player = Instantiate(variableForPrefab[chosen], new Vector3((float)0.6187416, (float)-0.1874166, 0), Quaternion.identity);
         _player.tag = "Player";
-
-        UIManager.Health = chosen switch
-        {
-            0 => 100,
-            1 => 250,
-            _ => UIManager.Health // Use current value if none of the cases match
-        };
     }
     
     public void AddMoney(int coins)

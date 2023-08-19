@@ -68,10 +68,10 @@ GameObject:
   m_Component:
   - component: {fileID: 492344373469506936}
   - component: {fileID: 1268111844697855459}
-  - component: {fileID: 2958904877064169528}
   - component: {fileID: 5890124738848140199}
+  - component: {fileID: 4296427757344949892}
   m_Layer: 8
-  m_Name: Speedy
+  m_Name: Tanky
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -145,27 +145,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2958904877064169528
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8954945802479895051}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8719cbb4d36aa9942aac80d1238ebbc1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characterName: 
-  speed: 2
-  damage: 5
-  fireRate: 0
-  maxHealth: 100
-  health: 100
-  healthBar: {fileID: 0}
-  firePoint: {fileID: 492344373469506936}
-  bulletPrefab: {fileID: 8254775823121348147, guid: dbc8218717b48ef4cbd55af55088c1f7, type: 3}
 --- !u!50 &5890124738848140199
 Rigidbody2D:
   serializedVersion: 4
@@ -187,3 +166,24 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &4296427757344949892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8954945802479895051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15158871a6501b049abd522e9f6582a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterName: 
+  speed: 2
+  damage: 5
+  fireRate: 0
+  maxHealth: 100
+  health: 100
+  healthBar: {fileID: 0}
+  firePoint: {fileID: 492344373469506936}
+  bulletPrefab: {fileID: 8254775823121348147, guid: dbc8218717b48ef4cbd55af55088c1f7, type: 3}

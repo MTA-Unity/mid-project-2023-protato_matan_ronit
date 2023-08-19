@@ -1373,7 +1373,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03617ee704b282e45a7fe645ad737ac0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefeb: {fileID: 8588848314686001600, guid: 29d9908d0736bb244b05b50d46250d9a, type: 3}
+  enemyPrefab: {fileID: 8588848314686001600, guid: 29d9908d0736bb244b05b50d46250d9a, type: 3}
   enemyInterval: 3.5
 --- !u!4 &1361539321
 Transform:
@@ -1510,6 +1510,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   livesText: {fileID: 1820843583}
   pointsText: {fileID: 721491752}
+  slider: {fileID: 1019425135}
   popup: {fileID: 1915634870}
   stayPopup: {fileID: 1636600993}
   leavePopup: {fileID: 620557246}
@@ -1560,6 +1561,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   variableForPrefab:
   - {fileID: 8954945802479895051, guid: 7f9995e973051c34593af94b8039d803, type: 3}
+  - {fileID: 8954945802479895051, guid: 34d9a74c1c6ae9f4d805825d05306f7e, type: 3}
 --- !u!1 &1636600989
 GameObject:
   m_ObjectHideFlags: 0

@@ -41,7 +41,37 @@ public class ChosenCharacter : MonoBehaviour
 
     private void StartGame()
     {
-        Debug.Log("starting game");
+        UIManager.Money = 1000;
+        UIManager.Health = Chosen switch
+        {
+            0 => 150,
+            1 => 250,
+            _ => UIManager.Health // Use current value if none of the cases match
+        };
+        
+        UIManager.MaxHealth = Chosen switch
+        {
+            0 => 150,
+            1 => 250,
+            _ => UIManager.MaxHealth // Use current value if none of the cases match
+        };
+        
+        UIManager.Speed = Chosen switch
+        {
+            0 => 7,
+            1 => 2,
+            _ => UIManager.Speed // Use current value if none of the cases match
+        };
+        
+        UIManager.Damage = Chosen switch
+        {
+            0 => 3,
+            1 => 5,
+            _ => UIManager.Damage // Use current value if none of the cases match
+        };
+
+        Debug.Log("chose UIManager.Health = " + UIManager.Health);
+        Debug.Log("chose UIManager.Money = " + UIManager.Money);
         SceneManager.LoadScene("Gameplay");
     }
 }

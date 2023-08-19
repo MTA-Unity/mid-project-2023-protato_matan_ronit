@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
@@ -10,18 +9,26 @@ public class UIManager : MonoBehaviour
 {
     public TMP_Text livesText;
     public TMP_Text pointsText;
+
+    [SerializeField] private HealthBar slider;
+    
     
     public static int Health;
+    public static int MaxHealth;
     public static int Money;
+    
+    public static double Speed;
+    public static double Damage;
     
     public Button popup;
     public Button stayPopup;
     public Button leavePopup;
-
+    
+    
     public GameObject activePopup;
 
     public static bool IsPaused { get; private set; }
-
+    
 
     private void Start()
     {
@@ -32,35 +39,29 @@ public class UIManager : MonoBehaviour
         stay.onClick.AddListener(ClosePopup);
         var leave = leavePopup.GetComponent<Button>();
         leave.onClick.AddListener(LeaveGame);
-
     }
 
+    
     private void Update()
     {
+        if (Store.IsStore) return;
+        
         UpdateHealthText();
         UpdatePointsText();
     }
 
-    public void UpdateHealthText()
+    
+    private void UpdateHealthText()
     {
         livesText.text = $"{Health} HP";
+        slider.SetSlider(Health);
     }
 
-    public void UpdatePointsText()
+    private void UpdatePointsText()
     {
         pointsText.text = $"{Money} $";
     }
 
-    public void DecreaseLives()
-    {
-        Health--;
-        UpdateHealthText();
-
-        if (Health <= 0)
-        {
-            // Game over logic
-        }
-    }
 
     public void IncreasePoints(int amount)
     {
@@ -83,14 +84,11 @@ public class UIManager : MonoBehaviour
 
     private void LeaveGame()
     {
-        Debug.Log ("exit");
         SceneManager.LoadScene("MainMenu");
     }
 
     public void StayAndPlay()
     {
-        Debug.Log("stay");
         ClosePopup();
-        // Implement logic to continue playing
     }
 }
