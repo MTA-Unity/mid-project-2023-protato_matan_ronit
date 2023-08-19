@@ -1,10 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject enemyPrefeb;
+    [SerializeField] private GameObject enemyPrefab;
 
 
     [SerializeField] private float enemyInterval = 3.5f;
@@ -12,7 +11,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(spawnEnemy(enemyInterval, enemyPrefeb));
+        StartCoroutine(spawnEnemy(enemyInterval, enemyPrefab));
     }
 
     private IEnumerator spawnEnemy(float interval, GameObject enemy)

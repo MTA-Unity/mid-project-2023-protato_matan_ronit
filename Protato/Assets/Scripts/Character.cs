@@ -1,6 +1,4 @@
-using System;
 using UnityEngine;
-using UnityEngine.UI;
 
 public abstract class Character : MonoBehaviour
 {
@@ -73,7 +71,7 @@ public abstract class Character : MonoBehaviour
     {
         var bulletObject = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
         var bullet = bulletObject.GetComponent<Bullet>();
-        bullet.SetDirection(direction * Bullet.moveSpeed);
+        bullet.SetDirection(direction * Bullet.MoveSpeed);
         bulletObject.SetActive(true);
     }
 
@@ -95,7 +93,7 @@ public abstract class Character : MonoBehaviour
         }
     }
 
-    public void addMoney(int money)
+    public void AddMoney(int money)
     {
         UIManager.Money += money;
     }

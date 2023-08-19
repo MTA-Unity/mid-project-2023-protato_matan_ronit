@@ -1,9 +1,8 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public static float moveSpeed = 4f;
+    public static float MoveSpeed = 4f;
     public float lifeTime = 2f;
     private Camera _mainCamera;
     
@@ -23,7 +22,7 @@ public class Bullet : MonoBehaviour
     private void Update()
     {
         if(!UIManager.IsPaused)
-            transform.position += (Vector3)_direction * (Time.deltaTime * moveSpeed);
+            transform.position += (Vector3)_direction * (Time.deltaTime * MoveSpeed);
     }
 
 

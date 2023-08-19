@@ -42,10 +42,10 @@ public class Enemy : MonoBehaviour
     {
         // Play vanishing animation, apply visual effect, or deactivate the enemy
         Destroy(gameObject);
-        var animation = Instantiate(deathEffect);
-        animation.transform.position = transform.position;
+        var deathEffectAnimation = Instantiate(deathEffect);
+        deathEffectAnimation.transform.position = transform.position;
         GameManager.EnemyCounter--;
-        playerScript.addMoney(10);
+        playerScript.AddMoney(10);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

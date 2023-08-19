@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
 
     private int _money;
     
-    private static GameObject Player;
+    private static GameObject _player;
 
     public static float EnemyCounter;
 
@@ -23,10 +23,10 @@ public class GameManager : MonoBehaviour
         EnemyCounter = 0;
         
         _money = 0;
-        var chosen = ChosenCharacter._chosen;
+        var chosen = ChosenCharacter.Chosen;
        
-        Player = Instantiate(variableForPrefab[chosen], new Vector3((float)0.6187416, (float)-0.1874166, 0), Quaternion.identity);
-        Player.tag = "Player";
+        _player = Instantiate(variableForPrefab[chosen], new Vector3((float)0.6187416, (float)-0.1874166, 0), Quaternion.identity);
+        _player.tag = "Player";
 
         UIManager.Health = chosen switch
         {
