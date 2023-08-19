@@ -30,8 +30,8 @@ public class SpeedyCharacter : Character
     
     private void HandleMovement()
     {
-        Debug.Log("moving "+ this.speed);
-
+        Debug.Log("moving "+ speed);
+        speed = UIManager.Speed;
         var pos = transform.position;
        
         if (Input.GetKey("w"))
