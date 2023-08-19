@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
+using UnityEngine.SceneManagement;
 
 public abstract class Character : MonoBehaviour
 {
@@ -94,6 +95,8 @@ public abstract class Character : MonoBehaviour
         Debug.Log("UIManager.Health = " + UIManager.Health);
         if (health <= 0)
         {
+            Debug.Log("user lost");
+            SceneManager.LoadScene("UserLost");
             // Handle player death or game over
         }
     }

@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Gameplay.unity
     guid: 4b19ecb4b3bb4c54ab7995fdee1d987a
+  - enabled: 1
+    path: Assets/Scenes/UserLost.unity
+    guid: 1d86fd8fbe627684192a0f963857ed9f
   m_configObjects: {}
