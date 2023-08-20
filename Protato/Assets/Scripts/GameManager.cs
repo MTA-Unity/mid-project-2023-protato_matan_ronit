@@ -22,8 +22,6 @@ public class GameManager : MonoBehaviour
     
     public static float EnemyDeadCounter;
 
-   // public static int RoundNumber;
-
     private void Start()
     {
         switch (Rounds.RoundNumber)
