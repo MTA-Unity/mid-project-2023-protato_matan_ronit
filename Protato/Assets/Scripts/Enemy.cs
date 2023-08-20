@@ -10,10 +10,14 @@ public class Enemy : MonoBehaviour
 
     public Character playerScript;
 
+   
+
     [SerializeField] private GameObject deathEffect;
     
     private void Start()
     {
+       
+
         player = GameObject.FindWithTag("Player");
         damage = 10;
 

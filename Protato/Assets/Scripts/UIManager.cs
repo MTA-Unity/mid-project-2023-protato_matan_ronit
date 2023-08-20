@@ -11,7 +11,7 @@ public class UIManager : MonoBehaviour
     public TMP_Text pointsText;
 
     [SerializeField] private HealthBar slider;
-    
+
     
     public static int Health;
     public static int MaxHealth;

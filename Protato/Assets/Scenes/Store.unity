@@ -2526,6 +2526,7 @@ MonoBehaviour:
   buySpeed: {fileID: 393264988}
   buyDamage: {fileID: 2034427762}
   conBtn: {fileID: 945204175}
+  HealthBar: {fileID: 0}
 --- !u!1 &1680236465
 GameObject:
   m_ObjectHideFlags: 0
