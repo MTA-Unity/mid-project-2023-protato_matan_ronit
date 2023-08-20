@@ -10,14 +10,30 @@ public class Enemy : MonoBehaviour
 
     public Character playerScript;
 
-   
+    private const int Easy = 3;
+    private const int Medium = 2;
+    private const int Hard = 1;
 
     [SerializeField] private GameObject deathEffect;
     
     private void Start()
     {
-       
+        switch (Rounds.RoundNumber)
+        {
+            case Easy:
+                speed = 2;
+                break;
+            case Medium:
+                speed = 5;
+                break;
+            case Hard:
+                speed = 8;
+                break;
+            default:
+                break;
 
+        }
+        
         player = GameObject.FindWithTag("Player");
         damage = 10;
 

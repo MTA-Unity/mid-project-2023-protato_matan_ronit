@@ -7,16 +7,21 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private GameObject enemyPrefab;
 
 
-    [SerializeField] private float enemyInterval = 3.5f;
-  
+    [SerializeField] private float enemyInterval = 0.5f; //how long to wait before the enemies pop out 
+   // private float currentEnemyInterval;
+
+
     private void Start()
-    {  
-            StartCoroutine(spawnEnemy(enemyInterval, enemyPrefab));
+    {
+        //currentEnemyInterval = enemyInterval;
+        StartCoroutine(spawnEnemy(enemyInterval, enemyPrefab));
     }
 
     private IEnumerator spawnEnemy(float interval, GameObject enemy)
     {
-            yield return new WaitForSeconds(interval);
+       
+
+        yield return new WaitForSeconds(interval);
 
             if (GameManager.EnemyCounter > 0)
             {
@@ -35,6 +40,7 @@ public class EnemySpawner : MonoBehaviour
             }
         if (Rounds.RoundNumber > 0) 
         {
+            enemyInterval += 3.0f;
             StartCoroutine(spawnEnemy(interval, enemy));
         }
         else
