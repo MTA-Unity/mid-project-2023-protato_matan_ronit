@@ -15,7 +15,9 @@ public class Store : MonoBehaviour
     public Button conBtn;
 
     public HealthBar HealthBar;
-    
+
+   
+
     public static bool IsStore { get; private set; }
 
 

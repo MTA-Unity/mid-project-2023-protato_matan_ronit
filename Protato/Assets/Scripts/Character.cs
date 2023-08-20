@@ -66,7 +66,6 @@ public abstract class Character : MonoBehaviour
         }
         else
         {
-           // Debug.Log("Not Null!!");
             var mousePosition = MainCamera.ScreenToWorldPoint(Input.mousePosition);
             var bulletDirection = (mousePosition - transform.position).normalized;
             ShootBullet(bulletDirection);
@@ -97,7 +96,6 @@ public abstract class Character : MonoBehaviour
         {
             Debug.Log("user lost");
             SceneManager.LoadScene("UserLost");
-            // Handle player death or game over
         }
     }
 
