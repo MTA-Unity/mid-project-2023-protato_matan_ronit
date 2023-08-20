@@ -14,6 +14,10 @@ public class GameManager : MonoBehaviour
     
     private static GameObject _player;
 
+    private const int Easy = 3;
+    private const int Medium = 2;
+    private const int Hard = 1;
+
     public static float EnemyCounter;
     
     public static float EnemyDeadCounter;
@@ -22,8 +26,22 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        switch (Rounds.RoundNumber)
+        {
+            case Easy:
+                EnemyCounter = 2;
+                break;
+            case Medium:
+                EnemyCounter = 3;
+                break;
+            case Hard:
+                EnemyCounter = 4;
+                break;
+            default:
+                break;
+
+        }
         
-        EnemyCounter = 3;
 
         _money = 0;
         var chosen = ChosenCharacter.Chosen;

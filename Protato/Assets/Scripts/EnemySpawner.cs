@@ -33,7 +33,7 @@ public class EnemySpawner : MonoBehaviour
                 SceneManager.LoadScene("Store");
               
             }
-        if (Rounds.RoundNumber > 0)
+        if (Rounds.RoundNumber > 0) 
         {
             StartCoroutine(spawnEnemy(interval, enemy));
         }
