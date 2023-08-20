@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class UserLost : MonoBehaviour
+public class EndGame : MonoBehaviour
 {
     public Button exitBtn;
     
