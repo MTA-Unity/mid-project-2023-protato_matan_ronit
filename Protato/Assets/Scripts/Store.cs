@@ -70,7 +70,7 @@ public class Store : MonoBehaviour
     
     private void UpdateStoreButtons()
     {
-        if (UIManager.Money >= 0) return;
+        if (UIManager.Money >= 100) return;
         
         buyHealth.interactable = false;
         buySpeed.interactable = false;

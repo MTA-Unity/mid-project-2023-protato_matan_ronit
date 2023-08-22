@@ -16,6 +16,7 @@ public class EndGame : MonoBehaviour
     private static void ReturnMainMenu()
     {
         Debug.Log("ReturnMainMenu function called");
+        Rounds.RoundNumber = 3;
         SceneManager.LoadScene("MainMenu");
     }
 }
