@@ -8,6 +8,8 @@ public class Enemy : MonoBehaviour
 
     public int damage;
 
+    private int _hp = 100;
+
     public Character playerScript;
 
     private const int Easy = 3;
@@ -15,6 +17,11 @@ public class Enemy : MonoBehaviour
     private const int Hard = 1;
 
     [SerializeField] private GameObject deathEffect;
+
+    private float _lastTimeHit;
+
+    [SerializeField] private EnemyHealthBar enemyHealthBar;
+      
     
     private void Start()
     {
@@ -22,20 +29,25 @@ public class Enemy : MonoBehaviour
         {
             case Easy:
                 speed = 2;
+                _hp = 30;
+                damage = 20;
                 break;
             case Medium:
                 speed = 5;
+                _hp = 50;
+                damage = 10;
                 break;
             case Hard:
                 speed = 8;
+                _hp = 70;
+                damage = 15;
                 break;
-            default:
-                break;
-
         }
         
+        
         player = GameObject.FindWithTag("Player");
-        damage = 10;
+
+        enemyHealthBar.SetSliderMax(_hp);
 
         playerScript = GameObject.FindWithTag("Player").GetComponent<Character>();
     }
@@ -50,23 +62,28 @@ public class Enemy : MonoBehaviour
         
         var direction = pTrans - trans;
         direction.Normalize();
-        var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         
         transform.position =
             Vector2.MoveTowards(trans, pTrans, speed * Time.deltaTime);
-        
-        transform.rotation = Quaternion.Euler(Vector3.forward * angle);
     }
 
     private void OnHit()
     {
+        _hp -= UIManager.Damage;
+        enemyHealthBar.SetSlider(_hp);
         // Play vanishing animation, apply visual effect, or deactivate the enemy
+        if (_hp > 0) return;
+        Die();
+    }
+
+    private void Die()
+    {
         Destroy(gameObject);
         var deathEffectAnimation = Instantiate(deathEffect);
         deathEffectAnimation.transform.position = transform.position;
-        GameManager.EnemyCounter--;
+        UIManager.Killcounter--;
         Destroy(deathEffectAnimation, 1f);
-        playerScript.AddMoney(10);
+        playerScript.AddMoney(10);    
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -74,18 +91,27 @@ public class Enemy : MonoBehaviour
         switch (collision.gameObject.tag)
         {
             case "Bullet":
-                Debug.Log("Collision.");
                 // Handle collision with enemy
                 //destroy bullet     
                 Destroy(collision.gameObject);
                 this.OnHit();
                 break;
             case "Player":
-                Debug.Log("Collision with player.");
                 playerScript.TakeDamage(damage);
+                _lastTimeHit = 3;
                 break;
         }
         
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        _lastTimeHit -= Time.deltaTime;
+        if (!collision.gameObject.CompareTag("Player")) return;
+        if (_lastTimeHit > 0) return;
+        _lastTimeHit = 3;
+        playerScript.TakeDamage(damage);
+            
     }
 
     

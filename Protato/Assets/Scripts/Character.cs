@@ -12,6 +12,8 @@ public abstract class Character : MonoBehaviour
     [SerializeField] protected int maxHealth;
     [SerializeField] protected int health;
 
+    private AudioSource _audioShoot;
+    
     public HealthBar healthBar;
 
     public Transform firePoint;
@@ -29,9 +31,6 @@ public abstract class Character : MonoBehaviour
         health = UIManager.MaxHealth;
         speed = UIManager.Speed;
         damage = UIManager.Damage;
-        
-        Debug.Log("Character UIMManager.Health = " + UIManager.Health);
-        Debug.Log("Character UIManager.Money = " + UIManager.Money);
     }
 
     private void Awake()
@@ -42,7 +41,8 @@ public abstract class Character : MonoBehaviour
     protected virtual void Start()
     {
         Rb = GetComponent<Rigidbody2D>();
-        MainCamera = Camera.main; 
+        MainCamera = Camera.main;
+        _audioShoot = GetComponent<AudioSource>();
     }
 
     
@@ -54,6 +54,7 @@ public abstract class Character : MonoBehaviour
     protected virtual void HandleShooting()
     {
         if (!Input.GetButton("Fire1") || Time.time < _nextFireTime) return;
+        _audioShoot.Play();
         Shoot();
         _nextFireTime = Time.time + 0.5f;
     }
@@ -84,17 +85,13 @@ public abstract class Character : MonoBehaviour
     
     public void TakeDamage(int damageAmount)
     {
-        Debug.Log("before Health = " + health);
         UIManager.Health -= damageAmount;
         UIManager.Health = Mathf.Clamp(UIManager.Health, 0, UIManager.MaxHealth);
         health = UIManager.Health;
         
         healthBar.SetSlider(health);
-        Debug.Log("Health = " + health);
-        Debug.Log("UIManager.Health = " + UIManager.Health);
         if (health <= 0)
         {
-            Debug.Log("user lost");
             SceneManager.LoadScene("UserLost");
         }
     }

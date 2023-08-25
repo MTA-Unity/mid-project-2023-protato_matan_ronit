@@ -10,7 +10,7 @@ public class TankyCharacter : Character
         
         // Find the HealthBar GameObject by its tag
         healthBar = FindObjectOfType<HealthBar>();
-        healthBar.SetSliderMax(maxHealth);
+        healthBar.SetSliderMax(UIManager.MaxHealth);
     }
     
     protected override void Update()

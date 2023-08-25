@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
 {
     public TMP_Text livesText;
     public TMP_Text pointsText;
+    public TMP_Text counterText;
 
     [SerializeField] private HealthBar slider;
 
@@ -18,12 +19,14 @@ public class UIManager : MonoBehaviour
     public static int Money;
     
     public static double Speed;
-    public static double Damage;
+    public static int Damage;
     
     public Button popup;
     public Button stayPopup;
     public Button leavePopup;
     
+    public static float EnemyCounter;
+    public static float Killcounter;
     
     public GameObject activePopup;
 
@@ -48,6 +51,7 @@ public class UIManager : MonoBehaviour
         
         UpdateHealthText();
         UpdatePointsText();
+        UpdateEnemyText();
     }
 
     
@@ -57,21 +61,18 @@ public class UIManager : MonoBehaviour
         slider.SetSlider(Health);
     }
 
+    private void UpdateEnemyText()
+    {
+        counterText.text = $"remaining enemies: {Killcounter}";
+    }
+
     private void UpdatePointsText()
     {
         pointsText.text = $"{Money} $";
     }
 
-
-    public void IncreasePoints(int amount)
-    {
-        Money += amount;
-        UpdatePointsText();
-    }
-    
     private void ShowPopup()
     {
-        Debug.Log("creating popup");
         activePopup.SetActive(true);
         IsPaused = true;
     }

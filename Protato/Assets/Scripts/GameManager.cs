@@ -18,26 +18,24 @@ public class GameManager : MonoBehaviour
     private const int Medium = 2;
     private const int Hard = 1;
 
-    public static float EnemyCounter;
-    
-    public static float EnemyDeadCounter;
-
     private void Start()
     {
+        Debug.Log("round = " + Rounds.RoundNumber);
         switch (Rounds.RoundNumber)
         {
             case Easy:
-                EnemyCounter = 2;
+                UIManager.EnemyCounter = 2;
+                UIManager.Killcounter = 2;
+                Debug.Log("killcounter = " + UIManager.Killcounter);
                 break;
             case Medium:
-                EnemyCounter = 3;
+                UIManager.EnemyCounter = 3;
+                UIManager.Killcounter = 3;
                 break;
             case Hard:
-                EnemyCounter = 4;
+                UIManager.EnemyCounter = 4;
+                UIManager.Killcounter = 4;
                 break;
-            default:
-                break;
-
         }
         
 

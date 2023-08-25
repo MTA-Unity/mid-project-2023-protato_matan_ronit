@@ -19,24 +19,21 @@ public class EnemySpawner : MonoBehaviour
 
     private IEnumerator spawnEnemy(float interval, GameObject enemy)
     {
-       
-
         yield return new WaitForSeconds(interval);
 
-            if (GameManager.EnemyCounter > 0)
+            if (UIManager.EnemyCounter > 0)
             {
-                Debug.Log("GameManager.EnemyCounter = " + GameManager.EnemyCounter);
-                GameManager.EnemyCounter--;
+                UIManager.EnemyCounter--;
                 var newEnemy = Instantiate(enemy, new Vector3(Random.Range(-5f, 5), Random.Range(-5f, 5)),
                     Quaternion.identity);
             }
             else
             {
-                Rounds.RoundNumber--;
-                Debug.Log("Rounds.RoundNumber: " + Rounds.RoundNumber);
-                Debug.Log("loading store");
-                SceneManager.LoadScene("Store");
-              
+                if (UIManager.Killcounter <= 0)
+                {
+                    Rounds.RoundNumber--;
+                    SceneManager.LoadScene("Store");
+                }
             }
         if (Rounds.RoundNumber > 0) 
         {
@@ -45,7 +42,6 @@ public class EnemySpawner : MonoBehaviour
         }
         else
         {
-            Debug.Log("game finished");
             SceneManager.LoadScene("UserWin");
         }  
     }
