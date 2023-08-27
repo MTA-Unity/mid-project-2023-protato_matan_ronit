@@ -11,6 +11,9 @@ public class ChosenCharacter : MonoBehaviour
     public Color normalColor = Color.black;      // The normal color of the button
     public Color highlightColor = Color.yellow;  // The highlight
 
+    public float normalOutlineSize = 0;         // The normal size of the outline
+    public float highlightOutlineSize = 2;      // The highlight size of the outline
+
     public static int Chosen;
 
     private void Start()
@@ -24,19 +27,24 @@ public class ChosenCharacter : MonoBehaviour
     private void HighlightSpeedy()
     {
         Chosen = 0;
-        var outlinePressed = speedyBtn.GetComponent<Outline>();
-        var outlineCancel = tankyBtn.GetComponent<Outline>();
-        outlinePressed.effectColor = highlightColor;
-        outlineCancel.effectColor = normalColor;
+        SetButtonOutline(speedyBtn, highlightOutlineSize);
+        SetButtonOutline(tankyBtn, normalOutlineSize); // Reset outline size of the other button
     }
     
     private void HighlightTanky()
     {
         Chosen = 1;
-        var outlinePressed = tankyBtn.GetComponent<Outline>();
-        var outlineCancel = speedyBtn.GetComponent<Outline>();
-        outlinePressed.effectColor = highlightColor;
-        outlineCancel.effectColor = normalColor;
+        SetButtonOutline(tankyBtn, highlightOutlineSize);
+        SetButtonOutline(speedyBtn, normalOutlineSize); // Reset outline size of the other button
+    }
+    
+    private void SetButtonOutline(Button button, float size)
+    {
+        var outline = button.GetComponent<Outline>();
+        if (outline != null)
+        {
+            outline.effectDistance = new Vector2(size, size);
+        }
     }
 
     private void StartGame()
@@ -70,8 +78,6 @@ public class ChosenCharacter : MonoBehaviour
             _ => UIManager.Damage // Use current value if none of the cases match
         };
 
-        Debug.Log("chose UIManager.Health = " + UIManager.Health);
-        Debug.Log("chose UIManager.Money = " + UIManager.Money);
         SceneManager.LoadScene("Gameplay");
     }
 }

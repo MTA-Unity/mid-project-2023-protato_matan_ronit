@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
 
     public int damage;
 
-    private int _hp = 100;
+    private int _hp;
 
     public Character playerScript;
 
@@ -33,14 +33,14 @@ public class Enemy : MonoBehaviour
                 damage = 20;
                 break;
             case Medium:
-                speed = 5;
-                _hp = 50;
-                damage = 10;
+                speed = 3;
+                _hp = 40;
+                damage = 20;
                 break;
             case Hard:
-                speed = 8;
-                _hp = 70;
-                damage = 15;
+                speed = 4;
+                _hp = 50;
+                damage = 25;
                 break;
         }
         

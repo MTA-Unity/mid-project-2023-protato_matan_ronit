@@ -1552,7 +1552,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1601,8 +1601,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   variableForPrefab:
-  - {fileID: 8954945802479895051, guid: 7f9995e973051c34593af94b8039d803, type: 3}
-  - {fileID: 8954945802479895051, guid: 34d9a74c1c6ae9f4d805825d05306f7e, type: 3}
+  - {fileID: 7060310827101515476, guid: 940648931b251f646befd625a9907805, type: 3}
+  - {fileID: 1869813252047285882, guid: 67821c1fa48e8d84e88980e29562a1e8, type: 3}
 --- !u!1 &1636600989
 GameObject:
   m_ObjectHideFlags: 0
