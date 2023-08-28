@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9185178296928529715}
   - component: {fileID: 5090957262631178891}
   - component: {fileID: 8674262123244529083}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,7 +86,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1225844438925312360}
   - component: {fileID: 5967694264969670257}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -160,6 +160,64 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &5126395863720356310
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3919100298121837392}
+  - component: {fileID: 1658929643553956695}
+  m_Layer: 9
+  m_Name: Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3919100298121837392
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5126395863720356310}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.06, y: -0.05, z: 0}
+  m_LocalScale: {x: 0.85, y: 1.24, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8215159593817060171}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1658929643553956695
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5126395863720356310}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &6788495544794402132
 GameObject:
   m_ObjectHideFlags: 0
@@ -172,7 +230,7 @@ GameObject:
   - component: {fileID: 6957986350748101264}
   - component: {fileID: 5803624469087270850}
   - component: {fileID: 3781065695072741570}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -193,7 +251,7 @@ RectTransform:
   m_Children:
   - {fileID: 7713190495457868391}
   m_Father: {fileID: 8215159593817060171}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -272,7 +330,7 @@ GameObject:
   - component: {fileID: 307478664089384655}
   - component: {fileID: 84076424463308236}
   - component: {fileID: 2408399827947333966}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -348,9 +406,9 @@ GameObject:
   - component: {fileID: 7713190495457868391}
   - component: {fileID: 4157284132144800758}
   - component: {fileID: 3173277044303235872}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: HealthBar
-  m_TagString: Untagged
+  m_TagString: HealthBarTag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -416,7 +474,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 307478664089384655}
   m_HandleRect: {fileID: 0}
@@ -451,8 +509,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2886428333359087916}
   - component: {fileID: 6075073660301317635}
-  m_Layer: 0
-  m_Name: collider
+  m_Layer: 9
+  m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -483,7 +541,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -512,9 +570,9 @@ GameObject:
   - component: {fileID: 399345806494410996}
   - component: {fileID: 5731689036086999281}
   - component: {fileID: 3258635943469477627}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: zombie1
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -533,6 +591,7 @@ Transform:
   m_Children:
   - {fileID: 1225844438925312360}
   - {fileID: 2886428333359087916}
+  - {fileID: 3919100298121837392}
   - {fileID: 8959639190248453378}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -647,5 +706,5 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
   m_Constraints: 4

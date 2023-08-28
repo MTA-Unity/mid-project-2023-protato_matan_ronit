@@ -19,7 +19,7 @@ public class UIManager : MonoBehaviour
     public static int Money;
     
     public static double Speed;
-    public static int Damage;
+    public static double Damage;
     
     public Button popup;
     public Button stayPopup;
@@ -27,6 +27,8 @@ public class UIManager : MonoBehaviour
     
     public static float EnemyCounter;
     public static float Killcounter;
+    public static float EnemyWorth;
+    public static double enemyInterval;
     
     public GameObject activePopup;
 

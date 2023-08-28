@@ -20,29 +20,32 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("round = " + Rounds.RoundNumber);
         switch (Rounds.RoundNumber)
         {
             case Easy:
-                UIManager.EnemyCounter = 2;
-                UIManager.Killcounter = 2;
-                Debug.Log("killcounter = " + UIManager.Killcounter);
+                UIManager.EnemyCounter = 5;
+                UIManager.Killcounter = 5;
+                UIManager.EnemyWorth = 20;
+                UIManager.enemyInterval = 2;
+                Debug.Log("enemyInterval = " + UIManager.enemyInterval);
                 break;
             case Medium:
-                UIManager.EnemyCounter = 3;
-                UIManager.Killcounter = 3;
+                UIManager.EnemyCounter = 8;
+                UIManager.Killcounter = 8;
+                UIManager.EnemyWorth = 30;
+                UIManager.enemyInterval = 1.5;
                 break;
             case Hard:
-                UIManager.EnemyCounter = 4;
-                UIManager.Killcounter = 4;
+                UIManager.EnemyCounter = 12;
+                UIManager.Killcounter = 12;
+                UIManager.EnemyWorth = 50;
+                UIManager.enemyInterval = 1;
                 break;
         }
-        
+
 
         _money = 0;
         var chosen = ChosenCharacter.Chosen;
-        Debug.Log("GameManager UIMManager.Health = " + UIManager.Health);
-        Debug.Log("GameManager UIManager.Money = " + UIManager.Money);
         _player = Instantiate(variableForPrefab[chosen], new Vector3((float)0.6187416, (float)-0.1874166, 0), Quaternion.identity);
         _player.tag = "Player";
     }

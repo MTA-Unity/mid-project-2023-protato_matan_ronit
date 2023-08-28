@@ -54,12 +54,12 @@ public class Store : MonoBehaviour
     }
     private void AddSpeed()
     {
-        UIManager.Speed += 0.5;
+        UIManager.Speed *= 1.1;
         UIManager.Money -= 100;
     }
     private void AddDamage()
     {
-        UIManager.Damage += 10;
+        UIManager.Damage *= 1.1;
         UIManager.Money -= 100;
     }
     private void AddHealth()

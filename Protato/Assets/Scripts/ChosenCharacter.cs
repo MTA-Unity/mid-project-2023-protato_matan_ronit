@@ -49,7 +49,7 @@ public class ChosenCharacter : MonoBehaviour
 
     private void StartGame()
     {
-        UIManager.Money = 1000;
+        UIManager.Money = 0;
         UIManager.Health = Chosen switch
         {
             0 => 150,

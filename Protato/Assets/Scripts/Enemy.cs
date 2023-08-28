@@ -22,7 +22,7 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] private EnemyHealthBar enemyHealthBar;
       
-    
+
     private void Start()
     {
         switch (Rounds.RoundNumber)
@@ -69,7 +69,7 @@ public class Enemy : MonoBehaviour
 
     private void OnHit()
     {
-        _hp -= UIManager.Damage;
+        _hp -= (int)UIManager.Damage;
         enemyHealthBar.SetSlider(_hp);
         // Play vanishing animation, apply visual effect, or deactivate the enemy
         if (_hp > 0) return;
@@ -82,17 +82,19 @@ public class Enemy : MonoBehaviour
         var deathEffectAnimation = Instantiate(deathEffect);
         deathEffectAnimation.transform.position = transform.position;
         UIManager.Killcounter--;
+        Debug.Log("UIManager.Killcounter = " + UIManager.Killcounter);
         Destroy(deathEffectAnimation, 1f);
-        playerScript.AddMoney(10);    
+        playerScript.AddMoney((int)UIManager.EnemyWorth);    
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         switch (collision.gameObject.tag)
         {
             case "Bullet":
                 // Handle collision with enemy
-                //destroy bullet     
+                //destroy bullet 
+                collision.gameObject.SetActive(false);
                 Destroy(collision.gameObject);
                 this.OnHit();
                 break;
@@ -101,6 +103,10 @@ public class Enemy : MonoBehaviour
                 _lastTimeHit = 3;
                 break;
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
         
     }
 

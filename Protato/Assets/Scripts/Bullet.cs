@@ -11,7 +11,8 @@ public class Bullet : MonoBehaviour
     
     private Vector2 _direction;
 
-   
+    private bool active = true;
+
     private void Awake()
     {
         Destroy(gameObject, lifeTime);
