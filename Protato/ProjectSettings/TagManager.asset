@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - HealthBarTag
+  - Enemy
+  - Bullet
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - Enemy
+  - Water
+  - UI
+  - Bullet
+  - background
+  - player
+  - panel
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: player
+    uniqueID: 4016172657
+    locked: 0
+  - name: Bullet
+    uniqueID: 3821260427
+    locked: 0
+  - name: Enemy
+    uniqueID: 1858468723
+    locked: 0
+  - name: background
+    uniqueID: 3883356167
+    locked: 0
